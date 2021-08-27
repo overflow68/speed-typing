@@ -1,14 +1,22 @@
 * {
     box-sizing: border-box;
   }
-  
+  html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
   body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background: #0F2027;  /* fallback for old browsers */
+    background: #0F2027; 
 background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
@@ -18,28 +26,30 @@ background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
   
-  .container {
+  .text {
     background-color: #F0DB4F;
     padding: 1rem;
     border-radius: .5rem;
-    width: 700px;
-    max-width: 90%;
+    max-width: 600px;
   }
   
   .timer {
-    position: absolute;
-    top: 2rem;
+    top: 20px;
     font-size: 3rem;
-    left:53rem;
+    width: 100%;
     color: #F0DB4F;
     font-weight: bold;
     
   }
+  .container{
+    
+    text-align: center;
+    justify-content: center;
+  }
   
   .quote-display {
     margin-bottom: 1rem;
-    margin-left: calc(1rem + 2px);
-    margin-right: calc(1rem + 2px);
+    
   }
   
   .quote-input {

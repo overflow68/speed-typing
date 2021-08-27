@@ -82,16 +82,21 @@ function Game() {
    
 
   return (
-    <div className="container">
-        <div className="timer">
+  
+      <div className="container"> 
+      <div className="timer">
       <div>{timer}</div>
     </div>
+    <div className="text">
+      
         <div id="quoteDisplay" className = "quote-display">{quote.split("").map(letter =>{return<span className="letter" id={i++}>{letter}</span>})}</div>
         <textarea id ="quoteInput" className = "quote-input" onChange={handleChange}></textarea>
         
 
       
     </div>
+    </div>
+    
   );
 }
 
