@@ -1,10 +1,28 @@
 import React, {useState,useEffect} from 'react';
 import '../styles/style.css'
 
+
 function Game() {
     const [quote, setQuote] =useState("")
-    const [empty,setEmpty] = useState(false)
+    const [newQuote,setNextQuote] = useState(false)
+    const [timer,setTimer]=useState(0)
+    const [reset, setReset] = useState(false)
    let i=0;
+
+   useEffect(()=>{
+    let ticker=setInterval(tick,1000)
+    return () => clearInterval(ticker);
+    
+    })
+
+    useEffect(()=>{
+        setTimer(0)
+    },[reset])
+
+    const tick = () =>{
+        setTimer(timer+1)
+        
+      }
     
     function fetchQuote(){
             return fetch('http://api.quotable.io/random')
@@ -14,15 +32,13 @@ function Game() {
         async function NextQuote(){
             const newQuote = await fetchQuote();
             setQuote(newQuote)
+            setReset(!reset)
 
         }      
         useEffect(() => {
             NextQuote()
-            console.log("rerendered")
-            
-            console.log(empty)
 
-        },[empty]);
+        },[newQuote]);
 
         const handleChange= (e) =>{
             let input = document.getElementById("quoteInput");
@@ -34,25 +50,30 @@ function Game() {
             if (e.target.value.localeCompare(quote) !== 0 ){
             splitQuote.forEach((letter,index)=>{
 
-                if (letter !==splitTyped[index] && index === splitTyped.length){
+                if (letter !==splitTyped[index] && splitTyped[index]){
 
                     domLetters[index].classList.add("incorrect")
                     domLetters[index].classList.remove("correct")
+                    
 
-                }else if(letter===splitTyped[index]){
+                }
+                else if(letter===splitTyped[index]){
 
                     domLetters[index].classList.add("correct")
                     domLetters[index].classList.remove("incorrect")
                    
+                }
+                else if(splitTyped.length !== splitQuote.length){
+                    domLetters[index].classList.remove("incorrect")
+                    domLetters[index].classList.remove("correct")
                 } 
             })}else{
                 input.value ="";
-                console.log("this should erase textCOntent")
                 arrayLetters.forEach(letter=>{
                     letter.classList.remove("correct")
                     letter.classList.remove("incorrect")
+                    setNextQuote(!newQuote)
                 })
-                setEmpty(!empty)
             }
 
             
@@ -62,6 +83,9 @@ function Game() {
 
   return (
     <div className="container">
+        <div className="timer">
+      <div>{timer}</div>
+    </div>
         <div id="quoteDisplay" className = "quote-display">{quote.split("").map(letter =>{return<span className="letter" id={i++}>{letter}</span>})}</div>
         <textarea id ="quoteInput" className = "quote-input" onChange={handleChange}></textarea>
         

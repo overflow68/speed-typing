@@ -8,7 +8,10 @@
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-color: #1E0555;
+    background: #0F2027;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   }
   
   body, .quote-input {
@@ -27,8 +30,10 @@
     position: absolute;
     top: 2rem;
     font-size: 3rem;
+    left:53rem;
     color: #F0DB4F;
     font-weight: bold;
+    
   }
   
   .quote-display {
